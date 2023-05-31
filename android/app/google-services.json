@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "758396742809",
+    "project_id": "roles-b2907",
+    "storage_bucket": "roles-b2907.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758396742809:android:229e1dfa17fccc579d1c08",
+        "android_client_info": {
+          "package_name": "com.example.roles"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5NcGZAiJBLdDFXsAnehZoLwIqAI8rstg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
