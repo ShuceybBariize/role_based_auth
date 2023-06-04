@@ -4,17 +4,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'login.dart';
-// import 'model.dart';
+import '../colors.dart';
+import '../login.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class Create_Admin_Staff extends StatefulWidget {
+  const Create_Admin_Staff({super.key});
 
   @override
   _RegisterState createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterState extends State<Create_Admin_Staff> {
   _RegisterState();
 
   bool showProgress = false;
@@ -41,12 +41,12 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[900],
+      // backgroundColor: Colors.white70,
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              color: Colors.orangeAccent[700],
+              color: Colors.white,
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
@@ -65,7 +65,7 @@ class _RegisterState extends State<Register> {
                           "Register Now",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 40,
                           ),
                         ),
@@ -78,20 +78,23 @@ class _RegisterState extends State<Register> {
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: 'Email',
-                            enabled: true,
-                            contentPadding: const EdgeInsets.only(
-                                left: 14.0, bottom: 8.0, top: 8.0),
+                            prefixIcon: const Icon(
+                              MdiIcons.email,
+                              color: Kactivecolor,
+                              size: 22,
+                            ),
+                            contentPadding: const EdgeInsets.all(18),
+                            fillColor: Colors.black,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Kinactivetextcolor, width: 1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                    color: Kinactivetextcolor, width: 1)),
+                            hintText: "Enter New Email",
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -124,19 +127,19 @@ class _RegisterState extends State<Register> {
                                     _isObscure = !_isObscure;
                                   });
                                 }),
-                            filled: true,
-                            fillColor: Colors.white,
                             hintText: 'Password',
                             enabled: true,
-                            contentPadding: const EdgeInsets.only(
-                                left: 14.0, bottom: 8.0, top: 15.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20),
+                            contentPadding: const EdgeInsets.all(18),
+                            fillColor: Colors.black,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Kinactivetextcolor, width: 1),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                  color: Kinactivetextcolor, width: 1),
                             ),
                           ),
                           validator: (value) {
@@ -168,19 +171,18 @@ class _RegisterState extends State<Register> {
                                     _isObscure2 = !_isObscure2;
                                   });
                                 }),
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: 'Confirm Password',
-                            enabled: true,
-                            contentPadding: const EdgeInsets.only(
-                                left: 14.0, bottom: 8.0, top: 15.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20),
+                            contentPadding: const EdgeInsets.all(18),
+                            fillColor: Colors.black,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Kinactivetextcolor, width: 1),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20),
+                            hintText: "Confirm Password",
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                  color: Kinactivetextcolor, width: 1),
                             ),
                           ),
                           validator: (value) {
@@ -200,15 +202,15 @@ class _RegisterState extends State<Register> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              "Rool : ",
+                              "Rool :    ",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                             ),
                             DropdownButton<String>(
-                              dropdownColor: Colors.blue[900],
+                              dropdownColor: Colors.white,
                               isDense: true,
                               isExpanded: false,
                               iconEnabledColor: Colors.white,
@@ -219,7 +221,7 @@ class _RegisterState extends State<Register> {
                                   child: Text(
                                     dropDownStringItem,
                                     style: const TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                     ),

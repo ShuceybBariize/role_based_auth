@@ -2,9 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'register.dart';
+import 'admin/create_user.dart';
+import 'admin/mainpage.dart';
+import 'colors.dart';
+import 'costomer.dart';
 import 'student.dart';
-import 'teacher.dart';
+
+export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -28,8 +32,8 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            Container(
-              color: Colors.orangeAccent[700],
+            SizedBox(
+              // color: Colors.orangeAccent[700],
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.70,
               child: Center(
@@ -39,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
                     key: _formkey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
                           height: 30,
@@ -48,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                           "Login",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 40,
                           ),
                         ),
@@ -58,32 +62,35 @@ class _LoginPageState extends State<LoginPage> {
                         TextFormField(
                           controller: emailController,
                           decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: 'Email',
-                            enabled: true,
-                            contentPadding: const EdgeInsets.only(
-                                left: 14.0, bottom: 8.0, top: 8.0),
+                            prefixIcon: const Icon(
+                              MdiIcons.email,
+                              color: Kactivecolor,
+                              size: 22,
+                            ),
+                            contentPadding: const EdgeInsets.all(18),
+                            fillColor: Colors.black,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Kinactivetextcolor, width: 1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                    color: Kinactivetextcolor, width: 1)),
+                            hintText: "Enter Your Email",
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Email cannot be empty";
                             }
-                            if (!RegExp(
-                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                .hasMatch(value)) {
+                            bool emailvalidator = RegExp(
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$&'*+-/=?^_`{|}~]+@a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(value);
+                            if (emailvalidator) {
                               return ("Please enter a valid email");
-                            } else {
-                              return null;
                             }
+                            return null;
                           },
                           onSaved: (value) {
                             emailController.text = value!;
@@ -91,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 25,
                         ),
                         TextFormField(
                           controller: passwordController,
@@ -106,20 +113,18 @@ class _LoginPageState extends State<LoginPage> {
                                     _isObscure3 = !_isObscure3;
                                   });
                                 }),
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: 'Password',
-                            enabled: true,
-                            contentPadding: const EdgeInsets.only(
-                                left: 14.0, bottom: 8.0, top: 15.0),
+                            contentPadding: const EdgeInsets.all(18),
+                            fillColor: Colors.black,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                  color: Kinactivetextcolor, width: 1),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: const BorderSide(
+                                    color: Kinactivetextcolor, width: 1)),
+                            hintText: "Enter Your Password",
                           ),
                           validator: (value) {
                             RegExp regex = RegExp(r'^.{6,}$');
@@ -138,26 +143,28 @@ class _LoginPageState extends State<LoginPage> {
                           keyboardType: TextInputType.emailAddress,
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
-                        MaterialButton(
-                          shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20.0))),
-                          elevation: 5.0,
-                          height: 40,
-                          onPressed: () {
-                            setState(() {
-                              visible = true;
-                            });
-                            signIn(
-                                emailController.text, passwordController.text);
-                          },
-                          color: Colors.white,
-                          child: const Text(
-                            "Login",
-                            style: TextStyle(
-                              fontSize: 20,
+                        Center(
+                          child: MaterialButton(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20.0))),
+                            elevation: 5.0,
+                            height: 40,
+                            onPressed: () {
+                              setState(() {
+                                visible = true;
+                              });
+                              signIn(emailController.text,
+                                  passwordController.text);
+                            },
+                            color: Kactivecolor,
+                            child: const Text(
+                              "Login",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ),
@@ -169,18 +176,20 @@ class _LoginPageState extends State<LoginPage> {
                             maintainAnimation: true,
                             maintainState: true,
                             visible: visible,
-                            child: Container(
-                                child: const CircularProgressIndicator(
-                              color: Colors.white,
-                            ))),
+                            child: Center(
+                              child: Container(
+                                  child: const CircularProgressIndicator(
+                                color: Colors.black,
+                              )),
+                            )),
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            Container(
-              color: Colors.white,
+            SizedBox(
+              // color: Colors.white,
               width: MediaQuery.of(context).size.width,
               child: Center(
                 child: Column(
@@ -202,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Register(),
+                            builder: (context) => const Create_Admin_Staff(),
                           ),
                         );
                       },
@@ -240,7 +249,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const Teacher(),
+              builder: (context) => const Main_page(),
             ),
           );
         } else {
@@ -252,7 +261,12 @@ class _LoginPageState extends State<LoginPage> {
           );
         }
       } else {
-        print('Document does not exist on the database');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Costomer(),
+          ),
+        );
       }
     });
   }
